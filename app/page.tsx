@@ -3,6 +3,7 @@ import { motion } from 'motion/react';
 import { ArrowRight, Sparkles, Code, Palette, Rocket } from 'lucide-react';
 import { Button } from './components/ui/button'; 
 import { ImageWithFallback } from './components/figma/ImageWithFallback';
+import Link from "next/link";
 
 interface HomePageProps {
   onNavigate: (page: string) => void;
@@ -45,24 +46,82 @@ export default function HomePage({ onNavigate }: HomePageProps) {
               We bring your vision to life through cutting-edge web & mobile development, stunning 3D & 2D animation, immersive game design, and innovative motion graphics.
             </p>
             
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Button
-                size="lg"
-                onClick={() => onNavigate('services')}
-                className="bg-gradient-to-r from-cyan-500 to-purple-600 hover:from-cyan-600 hover:to-purple-700 text-white"
-              >
-                Explore Services
-                <ArrowRight className="ml-2" size={18} />
-              </Button>
-              <Button
-                size="lg"
-                variant="outline"
-                onClick={() => onNavigate('portfolio')}
-                className="border-cyan-500/50 text-cyan-400 hover:bg-cyan-500/10"
-              >
-                View Portfolio
-              </Button>
-            </div>
+            <div
+  style={{
+    display: "flex",
+    flexDirection: "column",
+    gap: "1rem",
+    justifyContent: "center",
+    alignItems: "center",
+  }}
+>
+  {/* Explore Services Link */}
+  <Link href="/services" legacyBehavior>
+    <a
+      
+      style={{
+        display: "inline-flex",
+        alignItems: "center",
+        justifyContent: "center",
+        gap: "0.5rem",
+        padding: "0.75rem 1.5rem",
+        borderRadius: "0.5rem",
+        background: "linear-gradient(to right, #06b6d4, #9333ea)",
+        color: "#fff",
+        textDecoration: "none",
+        fontSize: "1rem",
+        fontWeight: 600,
+        transition: "all 0.2s",
+        cursor: "pointer",
+      }}
+      onMouseEnter={(e) => {
+        (e.currentTarget as HTMLAnchorElement).style.background =
+          "linear-gradient(to right, #0891b2, #7e22ce)";
+      }}
+      onMouseLeave={(e) => {
+        (e.currentTarget as HTMLAnchorElement).style.background =
+          "linear-gradient(to right, #06b6d4, #9333ea)";
+      }}
+    >
+      Explore Services
+      <ArrowRight size={18} />
+    </a>
+  </Link>
+
+  {/* View Portfolio Link */}
+  <Link href="/blog" legacyBehavior>
+    <a
+      onClick={(e) => {
+        e.preventDefault();
+        onNavigate("blog");
+      }}
+      style={{
+        display: "inline-flex",
+        alignItems: "center",
+        justifyContent: "center",
+        gap: "0.5rem",
+        padding: "0.75rem 1.5rem",
+        borderRadius: "0.5rem",
+        border: "1px solid rgba(6, 182, 212, 0.5)",
+        color: "#06b6d4",
+        textDecoration: "none",
+        fontSize: "1rem",
+        fontWeight: 600,
+        transition: "all 0.2s",
+        cursor: "pointer",
+      }}
+      onMouseEnter={(e) => {
+        (e.currentTarget as HTMLAnchorElement).style.background =
+          "rgba(6, 182, 212, 0.1)";
+      }}
+      onMouseLeave={(e) => {
+        (e.currentTarget as HTMLAnchorElement).style.background = "transparent";
+      }}
+    >
+      View Portfolio
+    </a>
+  </Link>
+</div>
           </motion.div>
         </div>
       </section>
