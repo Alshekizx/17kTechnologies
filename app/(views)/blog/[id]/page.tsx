@@ -2,7 +2,7 @@
 
 import { useParams } from "next/navigation";
 import { useState, useEffect } from "react";
-import { motion } from "framer-motion";
+import { motion } from "motion/react";
 import {
   Calendar,
   Clock,
@@ -201,15 +201,31 @@ export default function BlogDetailsPage() {
         )}
 
         {/* Content rendered with TipTap */}
-       {mounted && editor && (
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            className="mb-12 prose prose-invert max-w-none text-white"
-          >
-            <EditorContent editor={editor} />
-          </motion.div>
-        )}
+{mounted && editor && (
+  <motion.div
+    initial={{ opacity: 0, y: 20 }}
+    animate={{ opacity: 1, y: 0 }}
+    style={{
+      marginBottom: 48,
+      color: "#fff",
+      lineHeight: 1.75,
+      fontSize: 16,
+      wordBreak: "break-word",
+    }}
+  >
+    <EditorContent
+      editor={editor}
+      style={{
+        // general text styles
+        color: "#fff",
+        lineHeight: 1.75,
+        fontSize: 16,
+      }}
+      className=""
+    />
+  </motion.div>
+)}
+
 
         {/* Tags */}
         <div className="flex flex-wrap gap-2 mb-12">
@@ -248,3 +264,60 @@ export default function BlogDetailsPage() {
     </div>
   );
 }
+
+<style jsx>{`
+  .tiptap-content h1 {
+    font-size: 2rem;
+    font-weight: 700;
+    margin: 1.5rem 0 1rem 0;
+  }
+  .tiptap-content h2 {
+    font-size: 1.75rem;
+    font-weight: 600;
+    margin: 1.25rem 0 0.75rem 0;
+  }
+  .tiptap-content h3 {
+    font-size: 1.5rem;
+    font-weight: 600;
+    margin: 1rem 0 0.5rem 0;
+  }
+  .tiptap-content p {
+    margin: 0.75rem 0;
+  }
+  .tiptap-content a {
+    color: #06b6d4;
+    text-decoration: underline;
+  }
+  .tiptap-content ul,
+  .tiptap-content ol {
+    margin: 0.75rem 0 0.75rem 1.25rem;
+  }
+  .tiptap-content blockquote {
+    border-left: 4px solid #06b6d4;
+    padding-left: 12px;
+    color: #aaa;
+    font-style: italic;
+    margin: 0.75rem 0;
+  }
+  .tiptap-content code {
+    background-color: rgba(255,255,255,0.05);
+    padding: 2px 6px;
+    border-radius: 4px;
+    font-family: monospace;
+    font-size: 0.875rem;
+  }
+  .tiptap-content pre {
+    background-color: rgba(255,255,255,0.05);
+    padding: 12px;
+    border-radius: 8px;
+    overflow-x: auto;
+    font-family: monospace;
+    font-size: 0.875rem;
+    margin: 0.75rem 0;
+  }
+  .tiptap-content img {
+    max-width: 100%;
+    border-radius: 8px;
+    margin: 1rem 0;
+  }
+`}</style>

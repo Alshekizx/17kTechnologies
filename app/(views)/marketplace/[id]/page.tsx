@@ -3,7 +3,7 @@
 
 import { useParams } from "next/navigation";
 import { useState, useEffect } from "react";
-import { motion } from "framer-motion";
+import { motion } from 'motion/react';
 import {
   ArrowLeft,
   Star,
@@ -13,9 +13,6 @@ import {
 } from "lucide-react";
 import Link from "next/link";
 import { ImageWithFallback } from "@/app/components/figma/ImageWithFallback";
-import { Button } from "@/app/components/ui/button";
-import { Badge } from "@/app/components/ui/badge";
-
 import { db } from "@/app/lib/firebase";
 import { doc, getDoc, collection, query, where, getDocs } from "firebase/firestore";
 
@@ -35,82 +32,62 @@ interface MarketplaceItem {
 
 export default function MarketplaceItemPage() {
   const { id } = useParams();
-  const itemId = Array.isArray(id) ? id[0] : id; // Ensure a string ID
+  const itemId = Array.isArray(id) ? id[0] : id;
   const [item, setItem] = useState<MarketplaceItem | null>(null);
   const [relatedItems, setRelatedItems] = useState<MarketplaceItem[]>([]);
   const [activeImage, setActiveImage] = useState(0);
   const [loading, setLoading] = useState(true);
 
   const [email, setEmail] = useState("");
-const [showEmailPrompt, setShowEmailPrompt] = useState(false);
-const [processing, setProcessing] = useState(false);
+  const [showEmailPrompt, setShowEmailPrompt] = useState(false);
+  const [processing, setProcessing] = useState(false);
 
-const handleDownloadClick = () => {
-  setShowEmailPrompt(true);
-  if (processing) return;
+  const handleDownloadClick = () => {
+    setShowEmailPrompt(true);
+    if (processing) return;
+  };
 
-  
-};
+  const handlePurchaseClick = async () => {
+    setShowEmailPrompt(true);
+    if (processing) return;
+  };
 
-
-
-const handlePurchaseClick = async () => {
-  setShowEmailPrompt(true);
-  if (processing) return;
-
-};
-
-
-
-const handleSendLink = async () => {
-  if (!email || !/\S+@\S+\.\S+/.test(email)) {
-    alert("Enter a valid email");
-    return;
-  }
-
-  setProcessing(true);
-
-  try {
-    const endpoint = item?.isFree
-      ? "/api/free-download"
-      : "/api/grey/initiate";
-
-    const res = await fetch(endpoint, {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({
-        email,
-        itemId: item?.id,
-      }),
-    });
-
-    const data = await res.json();
-
-    if (!res.ok) throw new Error(data.error);
-
-    if (data.paymentUrl) {
-      window.location.href = data.paymentUrl;
+  const handleSendLink = async () => {
+    if (!email || !/\S+@\S+\.\S+/.test(email)) {
+      alert("Enter a valid email");
       return;
     }
+    setProcessing(true);
 
-    alert("Link sent to your email");
-    setShowEmailPrompt(false);
-    setEmail("");
-  } catch (err) {
-    alert("Something went wrong");
-  } finally {
-    setProcessing(false);
-  }
-};
+    try {
+      const endpoint = item?.isFree ? "/api/free-download" : "/api/grey/initiate";
+      const res = await fetch(endpoint, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ email, itemId: item?.id }),
+      });
+      const data = await res.json();
+      if (!res.ok) throw new Error(data.error);
 
-
+      if (data.paymentUrl) {
+        window.location.href = data.paymentUrl;
+        return;
+      }
+      alert("Link sent to your email");
+      setShowEmailPrompt(false);
+      setEmail("");
+    } catch (err) {
+      alert("Something went wrong");
+    } finally {
+      setProcessing(false);
+    }
+  };
 
   useEffect(() => {
-    if (!itemId) return; // Stop if no valid ID
+    if (!itemId) return;
 
     const fetchItem = async () => {
       try {
-        // Fetch item by ID from Firestore
         const docRef = doc(db, "marketplaceItems", itemId);
         const docSnap = await getDoc(docRef);
 
@@ -125,7 +102,6 @@ const handleSendLink = async () => {
           id: docSnap.id,
           title: data.title,
           type: data.type,
-        
           price: data.price,
           rating: data.rating || 0,
           downloads: data.downloads || 0,
@@ -138,7 +114,6 @@ const handleSendLink = async () => {
 
         setItem(fetchedItem);
 
-        // Fetch related items (same type, different ID)
         const relatedQuery = query(
           collection(db, "marketplaceItems"),
           where("type", "==", fetchedItem.type)
@@ -153,7 +128,6 @@ const handleSendLink = async () => {
               title: d.title,
               type: d.type,
               price: d.price,
-            
               rating: d.rating || 0,
               downloads: d.downloads || 0,
               description: d.description,
@@ -164,7 +138,7 @@ const handleSendLink = async () => {
             });
           }
         });
-        setRelatedItems(related);
+        setRelatedItems(related.slice(0, 3)); // reduce to 3 related items
       } catch (err) {
         console.error("Error fetching marketplace item:", err);
       } finally {
@@ -177,7 +151,7 @@ const handleSendLink = async () => {
 
   if (loading) {
     return (
-      <div className="min-h-screen bg-black flex items-center justify-center text-white">
+      <div style={{ minHeight: "100vh", backgroundColor: "#000", color: "#fff", display: "flex", justifyContent: "center", alignItems: "center" }}>
         Loading marketplace item...
       </div>
     );
@@ -185,54 +159,53 @@ const handleSendLink = async () => {
 
   if (!item) {
     return (
-      <div className="min-h-screen bg-black flex items-center justify-center text-gray-400">
+      <div style={{ minHeight: "100vh", backgroundColor: "#000", color: "#888", display: "flex", justifyContent: "center", alignItems: "center" }}>
         Item not found
       </div>
     );
   }
 
   return (
-    <div className="min-h-screen bg-black pt-24 pb-16">
-      <div className="container mx-auto px-4 max-w-8xl">
-
-        {/* Back */}
+    <div style={{ minHeight: "100vh", backgroundColor: "#000", paddingTop: 96, paddingBottom: 64 }}>
+      <div style={{ width: "100%", maxWidth: 1280, margin: "0 auto", padding: "0 16px" }}>
+        
+        {/* Back Button */}
         <Link href="/marketplace">
-          <Button variant="ghost" className="mb-6 text-gray-400 hover:text-white">
-            <ArrowLeft size={16} className="mr-2" />
+          <button style={{ marginBottom: 24, color: "#aaa", background: "transparent", border: "none", cursor: "pointer", display: "flex", alignItems: "center" }}>
+            <ArrowLeft size={16} style={{ marginRight: 8 }} />
             Back to Marketplace
-          </Button>
+          </button>
         </Link>
 
         {/* Product Section */}
-        <div className="grid md:grid-cols-2 gap-10 mb-16">
-
+        <div style={{ display: "flex", flexWrap: "wrap", gap: 40, marginBottom: 64 }}>
+          
           {/* Image Gallery */}
-          <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }}>
-            <div className="rounded-xl overflow-hidden border border-white/10 mb-4">
+          <motion.div style={{ flex: "1 1 400px" }} initial={{ opacity: 0 }} animate={{ opacity: 1 }}>
+            <div style={{ borderRadius: 12, overflow: "hidden", border: "1px solid rgba(255,255,255,0.1)", marginBottom: 16 }}>
               <ImageWithFallback
                 src={item.images[activeImage]}
                 alt={item.title}
-                className="w-full h-[380px] object-cover"
+                style={{ width: "100%", height: 380, objectFit: "cover" }}
               />
             </div>
 
             {item.images.length > 1 && (
-              <div className="flex gap-3">
+              <div style={{ display: "flex", gap: 12 }}>
                 {item.images.map((img, i) => (
                   <button
                     key={i}
                     onClick={() => setActiveImage(i)}
-                    className={`h-20 w-20 rounded-lg overflow-hidden border ${
-                      activeImage === i
-                        ? "border-cyan-500"
-                        : "border-white/10"
-                    }`}
+                    style={{
+                      height: 80,
+                      width: 80,
+                      borderRadius: 8,
+                      overflow: "hidden",
+                      border: activeImage === i ? "2px solid #06b6d4" : "1px solid rgba(255,255,255,0.1)",
+                      cursor: "pointer"
+                    }}
                   >
-                    <ImageWithFallback
-                      src={img}
-                      alt="Thumbnail"
-                      className="w-full h-full object-cover"
-                    />
+                    <ImageWithFallback src={img} alt="Thumbnail" style={{ width: "100%", height: "100%", objectFit: "cover" }} />
                   </button>
                 ))}
               </div>
@@ -240,84 +213,65 @@ const handleSendLink = async () => {
           </motion.div>
 
           {/* Product Info */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-          >
-            <Badge className="mb-3 bg-gradient-to-r from-cyan-500 to-purple-600 border-0">
+          <motion.div style={{ flex: "1 1 400px" }} initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }}>
+            <div style={{ background: "linear-gradient(to right, #06b6d4, #a855f7)", display: "inline-block", padding: "4px 12px", borderRadius: 4, marginBottom: 12, color: "#fff" }}>
               {item.type}
-            </Badge>
+            </div>
 
-            <h1 className="text-3xl text-white mb-3">{item.title}</h1>
+            <h1 style={{ fontSize: 28, color: "#fff", marginBottom: 12 }}>{item.title}</h1>
 
-            <div className="flex items-center gap-4 text-sm text-gray-400 mb-4">
-              <div className="flex items-center gap-1">
-                <Star size={14} className="text-yellow-500 fill-yellow-500" />
+            <div style={{ display: "flex", gap: 16, fontSize: 14, color: "#aaa", marginBottom: 16 }}>
+              <div style={{ display: "flex", alignItems: "center", gap: 4 }}>
+                <Star size={14} style={{ color: "#facc15" }} />
                 {item.rating}
               </div>
               <span>•</span>
               <span>{item.downloads} downloads</span>
             </div>
 
-            <p className="text-gray-300 mb-6 leading-relaxed">{item.description}</p>
+            <p style={{ color: "#ccc", marginBottom: 24, lineHeight: 1.6 }}>{item.description}</p>
 
-            <div className="flex flex-wrap gap-2 mb-6">
-              {item.tags.map((tag) => (
-                <Badge
-                  key={tag}
-                  variant="outline"
-                  className="border-white/20 text-gray-400"
-                >
-                  {tag}
-                </Badge>
+            <div style={{ display: "flex", flexWrap: "wrap", gap: 8, marginBottom: 24 }}>
+              {item.tags.map(tag => (
+                <div key={tag} style={{ border: "1px solid rgba(255,255,255,0.2)", padding: "2px 8px", borderRadius: 4, fontSize: 12, color: "#aaa" }}>{tag}</div>
               ))}
             </div>
 
-            <div className="flex items-center gap-4 mb-6">
-              <span className="text-2xl text-white">
-                {item.isFree ? (
-                  <span className="text-green-400">Free</span>
-                ) : (
-                  `$${item.price}`
-                )}
+            <div style={{ display: "flex", alignItems: "center", gap: 16, marginBottom: 24 }}>
+              <span style={{ fontSize: 24, color: "#fff" }}>
+                {item.isFree ? <span style={{ color: "#22c55e" }}>Free</span> : `$${item.price}`}
               </span>
-
-              <Button
-  className={
-    item.isFree
-      ? "bg-green-500 hover:bg-green-600"
-      : "bg-gradient-to-r from-cyan-500 to-purple-600"
-  }
-  onClick={item.isFree ? handleDownloadClick : handlePurchaseClick}
-  disabled={processing}
->
-  {item.isFree ? (
-    <>
-      <Download size={16} className="mr-2" />
-      {processing ? "Processing..." : "Download"}
-    </>
-  ) : (
-    <>
-      <ShoppingCart size={16} className="mr-2" />
-      {processing ? "Processing..." : "Purchase"}
-    </>
-  )}
-</Button>
-
+              <button
+                onClick={item.isFree ? handleDownloadClick : handlePurchaseClick}
+                disabled={processing}
+                style={{
+                  display: "flex",
+                  alignItems: "center",
+                  gap: 8,
+                  background: item.isFree ? "#22c55e" : "linear-gradient(to right, #06b6d4, #a855f7)",
+                  color: "#fff",
+                  padding: "8px 16px",
+                  borderRadius: 6,
+                  border: "none",
+                  cursor: "pointer",
+                  opacity: processing ? 0.6 : 1
+                }}
+              >
+                {item.isFree ? <Download size={16} /> : <ShoppingCart size={16} />}
+                {processing ? "Processing..." : item.isFree ? "Download" : "Purchase"}
+              </button>
             </div>
 
-            {/* License */}
-            <div className="border border-white/10 rounded-xl p-4 bg-white/5">
-              <h3 className="text-white mb-3">License</h3>
-              <ul className="space-y-2 text-sm text-gray-400">
+            <div style={{ border: "1px solid rgba(255,255,255,0.1)", borderRadius: 12, padding: 16, backgroundColor: "rgba(255,255,255,0.05)" }}>
+              <h3 style={{ color: "#fff", marginBottom: 12 }}>License</h3>
+              <ul style={{ listStyle: "none", padding: 0, margin: 0, color: "#aaa" }}>
                 {item.license.map((rule, i) => (
-                    <li key={i} className="flex items-center gap-2">
-                    <CheckCircle size={14} className="text-green-400" />
+                  <li key={i} style={{ display: "flex", alignItems: "center", gap: 8, marginBottom: 4 }}>
+                    <CheckCircle size={14} style={{ color: "#22c55e" }} />
                     {rule}
-                    </li>
+                  </li>
                 ))}
-                </ul>
-
+              </ul>
             </div>
           </motion.div>
         </div>
@@ -325,21 +279,15 @@ const handleSendLink = async () => {
         {/* Related Items */}
         {relatedItems.length > 0 && (
           <div>
-            <h2 className="text-2xl text-white mb-6">Related Items</h2>
-            <div className="grid md:grid-cols-3 gap-6">
-              {relatedItems.map((ri) => (
+            <h2 style={{ fontSize: 24, color: "#fff", marginBottom: 24 }}>Related Items</h2>
+            <div style={{ display: "flex", gap: 16, flexWrap: "wrap" }}>
+              {relatedItems.map(ri => (
                 <Link key={ri.id} href={`/marketplace/${ri.id}`}>
-                  <div className="group bg-white/5 border border-white/10 rounded-xl overflow-hidden hover:border-cyan-500/50 transition">
-                    <ImageWithFallback
-                      src={ri.images[0]}
-                      alt={ri.title}
-                      className="h-40 w-full object-cover group-hover:scale-105 transition-transform"
-                    />
-                    <div className="p-4">
-                      <h3 className="text-white text-sm mb-1">{ri.title}</h3>
-                      <p className="text-xs text-gray-400">
-                        {ri.isFree ? "Free" : `$${ri.price}`}
-                      </p>
+                  <div style={{ flex: "1 1 250px", borderRadius: 12, overflow: "hidden", border: "1px solid rgba(255,255,255,0.1)", backgroundColor: "rgba(255,255,255,0.05)", cursor: "pointer" }}>
+                    <ImageWithFallback src={ri.images[0]} alt={ri.title} style={{ width: "100%", height: 160, objectFit: "cover" }} />
+                    <div style={{ padding: 12 }}>
+                      <h3 style={{ color: "#fff", fontSize: 14, marginBottom: 4 }}>{ri.title}</h3>
+                      <p style={{ fontSize: 12, color: "#aaa" }}>{ri.isFree ? "Free" : `$${ri.price}`}</p>
                     </div>
                   </div>
                 </Link>
@@ -348,39 +296,28 @@ const handleSendLink = async () => {
           </div>
         )}
       </div>
-      {showEmailPrompt && (
-  <div className="fixed inset-0 bg-black/70 flex items-center justify-center z-50">
-    <div className="bg-white rounded-lg p-6 w-full max-w-md">
-      <h3 className="text-lg font-bold mb-4">Enter your Gmail</h3>
-      <input
-        type="email"
-        value={email}
-        onChange={(e) => setEmail(e.target.value)}
-        placeholder="you@example.com"
-        className="w-full p-2 rounded border mb-4"
-      />
-      <div className="flex justify-end gap-3">
-        <button
-          onClick={() => {
-            setShowEmailPrompt(false);
-            setEmail("");
-          }}
-          className="px-4 py-2 rounded border"
-        >
-          Cancel
-        </button>
-        <button
-          onClick={handleSendLink}
-          className="px-4 py-2 rounded bg-cyan-500 text-white"
-          disabled={processing}
-        >
-          {processing ? "Processing..." : "Send Link"}
-        </button>
-      </div>
-    </div>
-  </div>
-)}
 
+      {/* Email Modal */}
+      {showEmailPrompt && (
+        <div style={{ position: "fixed", inset: 0, zIndex: 50, display: "flex", justifyContent: "center", alignItems: "center", backgroundColor: "rgba(0,0,0,0.7)" }}>
+          <div style={{ backgroundColor: "#fff", borderRadius: 12, padding: 24, width: "100%", maxWidth: 400 }}>
+            <h3 style={{ fontSize: 16, fontWeight: "bold", marginBottom: 16 }}>Enter your Gmail</h3>
+            <input
+              type="email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              placeholder="you@example.com"
+              style={{ width: "100%", padding: 8, borderRadius: 6, border: "1px solid #ccc", marginBottom: 16 }}
+            />
+            <div style={{ display: "flex", justifyContent: "flex-end", gap: 8 }}>
+              <button onClick={() => { setShowEmailPrompt(false); setEmail(""); }} style={{ padding: "8px 16px", borderRadius: 6, border: "1px solid #ccc", cursor: "pointer" }}>Cancel</button>
+              <button onClick={handleSendLink} disabled={processing} style={{ padding: "8px 16px", borderRadius: 6, border: "none", backgroundColor: "#06b6d4", color: "#fff", cursor: "pointer" }}>
+                {processing ? "Processing..." : "Send Link"}
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 }

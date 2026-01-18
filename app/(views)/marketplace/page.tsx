@@ -3,7 +3,7 @@
 
 import { useState, useEffect } from "react";
 import Link from "next/link";
-import { motion } from "framer-motion";
+import { motion } from 'motion/react';
 import { Search, ShoppingCart, Download, Star } from "lucide-react";
 import { ImageWithFallback } from "@/app/components/figma/ImageWithFallback"; 
 import { Input } from "@/app/components/ui/input";
