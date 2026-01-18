@@ -56,7 +56,7 @@ export default function HomePage({ onNavigate }: HomePageProps) {
   }}
 >
   {/* Explore Services Link */}
-  <Link href="/services" legacyBehavior>
+  <div><Link href="/services" legacyBehavior>
     <a
       
       style={{
@@ -87,14 +87,14 @@ export default function HomePage({ onNavigate }: HomePageProps) {
       <ArrowRight size={18} />
     </a>
   </Link>
+  </div>
+  
 
   {/* View Portfolio Link */}
-  <Link href="/blog" legacyBehavior>
+  <div>
+    <Link href="/blog" legacyBehavior>
     <a
-      onClick={(e) => {
-        e.preventDefault();
-        onNavigate("blog");
-      }}
+   
       style={{
         display: "inline-flex",
         alignItems: "center",
@@ -120,7 +120,9 @@ export default function HomePage({ onNavigate }: HomePageProps) {
     >
       View Blog
     </a>
-  </Link>
+  </Link>  
+  </div>
+
 </div>
           </motion.div>
         </div>
@@ -189,12 +191,9 @@ export default function HomePage({ onNavigate }: HomePageProps) {
           <p className="text-gray-400 mb-8 max-w-2xl mx-auto">
             Let's collaborate to bring your creative vision to life with our expert team.
           </p>
-          <Link href="#contact" legacyBehavior>
+          <Link href="/contact" legacyBehavior>
   <a
-    onClick={(e) => {
-      e.preventDefault();
-      onNavigate("contact");
-    }}
+   
     style={{
       display: "inline-flex",
       alignItems: "center",
