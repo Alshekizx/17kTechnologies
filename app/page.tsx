@@ -118,7 +118,7 @@ export default function HomePage({ onNavigate }: HomePageProps) {
         (e.currentTarget as HTMLAnchorElement).style.background = "transparent";
       }}
     >
-      View Portfolio
+      View Blog
     </a>
   </Link>
 </div>
@@ -189,14 +189,40 @@ export default function HomePage({ onNavigate }: HomePageProps) {
           <p className="text-gray-400 mb-8 max-w-2xl mx-auto">
             Let's collaborate to bring your creative vision to life with our expert team.
           </p>
-          <Button
-            size="lg"
-            onClick={() => onNavigate('contact')}
-            className="bg-gradient-to-r from-cyan-500 to-purple-600 hover:from-cyan-600 hover:to-purple-700 text-white"
-          >
-            Get In Touch
-            <ArrowRight className="ml-2" size={18} />
-          </Button>
+          <Link href="#contact" legacyBehavior>
+  <a
+    onClick={(e) => {
+      e.preventDefault();
+      onNavigate("contact");
+    }}
+    style={{
+      display: "inline-flex",
+      alignItems: "center",
+      justifyContent: "center",
+      gap: "0.5rem",
+      padding: "0.75rem 1.5rem",
+      borderRadius: "0.5rem",
+      background: "linear-gradient(to right, #06b6d4, #9333ea)",
+      color: "#fff",
+      textDecoration: "none",
+      fontSize: "1rem",
+      fontWeight: 600,
+      cursor: "pointer",
+      transition: "all 0.2s",
+    }}
+    onMouseEnter={(e) => {
+      (e.currentTarget as HTMLAnchorElement).style.background =
+        "linear-gradient(to right, #0891b2, #7e22ce)";
+    }}
+    onMouseLeave={(e) => {
+      (e.currentTarget as HTMLAnchorElement).style.background =
+        "linear-gradient(to right, #06b6d4, #9333ea)";
+    }}
+  >
+    Get In Touch
+    <ArrowRight size={18} />
+  </a>
+</Link>
         </div>
       </section>
     </div>
