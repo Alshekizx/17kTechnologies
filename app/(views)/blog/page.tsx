@@ -113,16 +113,13 @@ useEffect(() => {
         {/* Tabs */}
         <Tabs defaultValue="all" className="w-full">
           <TabsList className="grid w-full max-w-2xl mx-auto grid-cols-4 mb-12 bg-white/5">
-            <TabsTrigger value="all" className="data-[state=active]:bg-gradient-to-r data-[state=active]:from-cyan-500 data-[state=active]:to-purple-600">
+            <TabsTrigger value="all" className="text-white data-[state=active]:bg-gradient-to-r data-[state=active]:from-cyan-500 data-[state=active]:to-purple-600">
               All Content
             </TabsTrigger>
-            <TabsTrigger value="article" className="data-[state=active]:bg-gradient-to-r data-[state=active]:from-cyan-500 data-[state=active]:to-purple-600">
+            <TabsTrigger value="article" className="text-white data-[state=active]:bg-gradient-to-r data-[state=active]:from-cyan-500 data-[state=active]:to-purple-600">
               Articles
             </TabsTrigger>
-            <TabsTrigger value="video" className="data-[state=active]:bg-gradient-to-r data-[state=active]:from-cyan-500 data-[state=active]:to-purple-600">
-              Videos
-            </TabsTrigger>
-            <TabsTrigger value="tutorial" className="data-[state=active]:bg-gradient-to-r data-[state=active]:from-cyan-500 data-[state=active]:to-purple-600">
+            <TabsTrigger value="tutorial" className="text-white data-[state=active]:bg-gradient-to-r data-[state=active]:from-cyan-500 data-[state=active]:to-purple-600">
               Tutorials
             </TabsTrigger>
           </TabsList>
@@ -132,9 +129,6 @@ useEffect(() => {
           </TabsContent>
           <TabsContent value="article" className="mt-0">
             <BlogGrid posts={blogPosts.filter((post) => post.type === "article")} getTypeIcon={getTypeIcon} />
-          </TabsContent>
-          <TabsContent value="video" className="mt-0">
-            <BlogGrid posts={blogPosts.filter((post) => post.type === "video")} getTypeIcon={getTypeIcon} />
           </TabsContent>
           <TabsContent value="tutorial" className="mt-0">
             <BlogGrid posts={blogPosts.filter((post) => post.type === "tutorial")} getTypeIcon={getTypeIcon} />

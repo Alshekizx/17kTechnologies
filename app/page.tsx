@@ -1,7 +1,6 @@
 "use client";
 import { motion } from 'motion/react';
 import { ArrowRight, Sparkles, Code, Palette, Rocket } from 'lucide-react';
-import { Button } from './components/ui/button'; 
 import { ImageWithFallback } from './components/figma/ImageWithFallback';
 import Link from "next/link";
 
@@ -56,71 +55,31 @@ export default function HomePage({ onNavigate }: HomePageProps) {
   }}
 >
   {/* Explore Services Link */}
-  <div><Link href="/services" legacyBehavior>
-    <a
-      
-      style={{
-        display: "inline-flex",
-        alignItems: "center",
-        justifyContent: "center",
-        gap: "0.5rem",
-        padding: "0.75rem 1.5rem",
-        borderRadius: "0.5rem",
-        background: "linear-gradient(to right, #06b6d4, #9333ea)",
-        color: "#fff",
-        textDecoration: "none",
-        fontSize: "1rem",
-        fontWeight: 600,
-        transition: "all 0.2s",
-        cursor: "pointer",
-      }}
-      onMouseEnter={(e) => {
-        (e.currentTarget as HTMLAnchorElement).style.background =
-          "linear-gradient(to right, #0891b2, #7e22ce)";
-      }}
-      onMouseLeave={(e) => {
-        (e.currentTarget as HTMLAnchorElement).style.background =
-          "linear-gradient(to right, #06b6d4, #9333ea)";
-      }}
-    >
-      Explore Services
-      <ArrowRight size={18} />
-    </a>
-  </Link>
+  <div>
+<Link
+  href="/services"
+  className="inline-flex items-center justify-center gap-2 px-6 py-3 rounded-lg text-white font-semibold
+             bg-gradient-to-r from-cyan-500 to-purple-600
+             hover:from-cyan-600 hover:to-purple-700 transition-all"
+>
+  Explore Services
+  <ArrowRight size={18} />
+</Link>
+
   </div>
   
 
   {/* View Portfolio Link */}
   <div>
-    <Link href="/blog" legacyBehavior>
-    <a
-   
-      style={{
-        display: "inline-flex",
-        alignItems: "center",
-        justifyContent: "center",
-        gap: "0.5rem",
-        padding: "0.75rem 1.5rem",
-        borderRadius: "0.5rem",
-        border: "1px solid rgba(6, 182, 212, 0.5)",
-        color: "#06b6d4",
-        textDecoration: "none",
-        fontSize: "1rem",
-        fontWeight: 600,
-        transition: "all 0.2s",
-        cursor: "pointer",
-      }}
-      onMouseEnter={(e) => {
-        (e.currentTarget as HTMLAnchorElement).style.background =
-          "rgba(6, 182, 212, 0.1)";
-      }}
-      onMouseLeave={(e) => {
-        (e.currentTarget as HTMLAnchorElement).style.background = "transparent";
-      }}
-    >
-      View Blog
-    </a>
-  </Link>  
+<Link
+  href="/blog"
+  className="inline-flex items-center justify-center gap-2 px-6 py-3 rounded-lg font-semibold
+             border border-cyan-500/50 text-cyan-400
+             hover:bg-cyan-500/10 transition-all"
+>
+  View Blog
+</Link>
+ 
   </div>
 
 </div>
@@ -158,11 +117,12 @@ export default function HomePage({ onNavigate }: HomePageProps) {
                 description: 'Captivating game characters and immersive backgrounds.',
                 color: 'pink'
               },
+            
               {
                 icon: Sparkles,
                 title: 'Innovation First',
                 description: 'Cutting-edge solutions that push creative boundaries.',
-                color: 'blue'
+                color: 'cyan'
               }
             ].map((feature, index) => (
               <motion.div
@@ -191,37 +151,16 @@ export default function HomePage({ onNavigate }: HomePageProps) {
           <p className="text-gray-400 mb-8 max-w-2xl mx-auto">
             Let's collaborate to bring your creative vision to life with our expert team.
           </p>
-          <Link href="/contact" legacyBehavior>
-  <a
-   
-    style={{
-      display: "inline-flex",
-      alignItems: "center",
-      justifyContent: "center",
-      gap: "0.5rem",
-      padding: "0.75rem 1.5rem",
-      borderRadius: "0.5rem",
-      background: "linear-gradient(to right, #06b6d4, #9333ea)",
-      color: "#fff",
-      textDecoration: "none",
-      fontSize: "1rem",
-      fontWeight: 600,
-      cursor: "pointer",
-      transition: "all 0.2s",
-    }}
-    onMouseEnter={(e) => {
-      (e.currentTarget as HTMLAnchorElement).style.background =
-        "linear-gradient(to right, #0891b2, #7e22ce)";
-    }}
-    onMouseLeave={(e) => {
-      (e.currentTarget as HTMLAnchorElement).style.background =
-        "linear-gradient(to right, #06b6d4, #9333ea)";
-    }}
-  >
-    Get In Touch
-    <ArrowRight size={18} />
-  </a>
+<Link
+  href="/contact"
+  className="inline-flex items-center justify-center gap-2 px-6 py-3 rounded-lg text-white font-semibold
+             bg-gradient-to-r from-cyan-500 to-purple-600
+             hover:from-cyan-600 hover:to-purple-700 transition-all"
+>
+  Get In Touch
+  <ArrowRight size={18} />
 </Link>
+
         </div>
       </section>
     </div>

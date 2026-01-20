@@ -131,20 +131,30 @@ export default function UploadBlogPage() {
             />
           </div>
 
-          <div>
-            <Label className="text-white">Category</Label>
-            <select
-              value={category}
-              onChange={(e) => setCategory(e.target.value)}
-              className="w-full p-2 rounded-md bg-white/5 text-black border border-white/10"
-            >
-              <option value="General">General</option>
-              <option value="3D Design">3D Design</option>
-              <option value="Tutorial">Tutorial</option>
-              <option value="Tips & Tricks">Tips & Tricks</option>
-              <option value="News">News</option>
-            </select>
-          </div>
+<div>
+  <Label style={{ color: "#ffffff" }}>
+    Category
+  </Label>
+
+  <select
+    value={category}
+    onChange={(e) => setCategory(e.target.value)}
+    style={{
+      width: "100%",
+      padding: "0.5rem",
+      borderRadius: "0.375rem",
+      backgroundColor: "#ffffff",
+      color: "#000000",
+      border: "1px solid rgba(255, 255, 255, 0.1)",
+      outline: "none",
+    }}
+  >
+    <option value="General">General</option>
+    <option value="Tutorial">Tutorials</option>
+    <option value="News">Articles</option>
+  </select>
+</div>
+
 
           <div>
             <Label className="text-white">Content</Label>

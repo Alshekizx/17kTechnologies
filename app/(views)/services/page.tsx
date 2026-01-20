@@ -3,12 +3,13 @@ import { motion } from 'motion/react';
 import { Code, Smartphone, Box, Film, Zap, Gamepad2, Palette, Sparkles } from 'lucide-react';
 import { ImageWithFallback } from '@/app/components/figma/ImageWithFallback'; 
 import { Button } from '@/app/components/ui/button';
+import Link from "next/link";
 
 interface ServicesPageProps {
   onNavigate: (page: string) => void;
 }
 
-export default function ServicesPage({ onNavigate }: ServicesPageProps) {
+export default function ServicesPage() {
   const services = [
     {
       icon: Code,
@@ -108,12 +109,13 @@ export default function ServicesPage({ onNavigate }: ServicesPageProps) {
                   ))}
                 </div>
 
-                <Button
-                  onClick={() => onNavigate('contact')}
-                  className={`bg-gradient-to-r ${service.gradient} hover:opacity-90 text-white`}
-                >
-                  Get Started
-                </Button>
+<Link
+  href="/contact"
+  className={`inline-flex items-center justify-center px-6 py-3 rounded-md font-medium
+              bg-gradient-to-r ${service.gradient} text-white hover:opacity-90 transition`}
+>
+  Get Started
+</Link>
               </div>
 
               <div className={index % 2 === 1 ? 'lg:col-start-1 lg:row-start-1' : ''}>
@@ -141,13 +143,15 @@ export default function ServicesPage({ onNavigate }: ServicesPageProps) {
           <p className="text-gray-400 mb-6 max-w-2xl mx-auto">
             We offer tailored services to meet your specific requirements. Let's discuss how we can help bring your project to life.
           </p>
-          <Button
-            size="lg"
-            onClick={() => onNavigate('contact')}
-            className="bg-gradient-to-r from-cyan-500 to-purple-600 hover:from-cyan-600 hover:to-purple-700 text-white"
-          >
-            Contact Us Today
-          </Button>
+<Link
+  href="/contact"
+  className="inline-flex items-center justify-center px-8 py-4 rounded-md text-lg font-semibold
+             bg-gradient-to-r from-cyan-500 to-purple-600
+             hover:from-cyan-600 hover:to-purple-700 text-white transition"
+>
+  Contact Us Today
+</Link>
+
         </motion.div>
       </div>
     </div>
