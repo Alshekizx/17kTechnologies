@@ -190,15 +190,23 @@ export default function BlogDetailsPage() {
         </motion.div>
 
         {/* Video if present */}
-        {post.video && (
-          <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="mb-8">
-            <video
-              src={post.video}
-              controls
-              className="w-full rounded-lg border border-white/10"
-            />
-          </motion.div>
-        )}
+{post.video && post.video.includes("youtube.com") && (
+  <motion.div
+    initial={{ opacity: 0 }}
+    animate={{ opacity: 1 }}
+    className="mb-8 aspect-video w-full overflow-hidden rounded-lg border border-white/10"
+  >
+    <iframe
+      src={post.video.replace("watch?v=", "embed/")}
+      title="YouTube video player"
+      className="w-full h-full"
+      frameBorder="0"
+      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+      allowFullScreen
+    />
+  </motion.div>
+)}
+
 
         {/* Content rendered with TipTap */}
 {mounted && editor && (
