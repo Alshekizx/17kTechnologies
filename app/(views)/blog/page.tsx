@@ -10,6 +10,8 @@ import { Badge } from "@/app/components/ui/badge";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/app/components/ui/tabs";
 import { db } from "@/app/lib/firebase";
 import { collection, getDocs, orderBy, query } from "firebase/firestore";
+import { EditorContent, useEditor } from "@tiptap/react";
+import StarterKit from "@tiptap/starter-kit";
 
 interface BlogPost {
   id: string;
@@ -23,6 +25,23 @@ interface BlogPost {
   tags: string[];
   image: string;
 }
+
+function ReadOnlyExcerpt({ content }: { content: string }) {
+  const editor = useEditor({
+    extensions: [StarterKit],
+    content,
+    editable: false,
+  });
+
+  if (!editor) return null;
+
+  return (
+    <div className="text-sm text-gray-400 mb-4 line-clamp-2 overflow-hidden">
+      <EditorContent editor={editor} />
+    </div>
+  );
+}
+
 
 export default function BlogPage() {
   const [blogPosts, setBlogPosts] = useState<BlogPost[]>([]);
@@ -176,7 +195,7 @@ function BlogGrid({ posts, getTypeIcon }: { posts: BlogPost[]; getTypeIcon: (typ
             <div className="p-6">
               <div className="text-xs text-cyan-400 mb-2">{post.category}</div>
               <h3 className="text-white mb-2 line-clamp-2">{post.title}</h3>
-              <p className="text-sm text-gray-400 mb-4 line-clamp-2">{post.excerpt}</p>
+              <ReadOnlyExcerpt content={post.excerpt} />
 
               <div className="flex items-center gap-4 text-xs text-gray-500 mb-4">
                 <div className="flex items-center gap-1">
