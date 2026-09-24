@@ -31,6 +31,7 @@ function ReadOnlyExcerpt({ content }: { content: string }) {
     extensions: [StarterKit],
     content,
     editable: false,
+    immediatelyRender: false,
   });
 
   if (!editor) return null;

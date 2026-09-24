@@ -1,5 +1,5 @@
 {
-  "name": "my-next-app",
+  "name": "17k",
   "version": "0.1.0",
   "private": true,
   "scripts": {
@@ -54,7 +54,7 @@
     "react-day-picker": "^9.13.0",
     "react-dom": "19.2.3",
     "react-hook-form": "",
-    "react-resizable-panels": "^1.0.9",
+    "react-resizable-panels": "^2.1.9",
     "recharts": "^3.6.0",
     "resend": "^6.7.0",
     "sonner": "",

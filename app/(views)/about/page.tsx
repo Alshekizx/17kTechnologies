@@ -143,37 +143,46 @@ export default function AboutPage() {
           </div>
         </section>
 
-        {/* Team Section */}
-        <section>
+        {/* Completed Products */}
+        <section aria-labelledby="products-heading">
           <div className="text-center mb-12">
-            <h2 className="text-3xl text-white mb-4">Expert Team</h2>
+            <h2 id="products-heading" className="text-3xl text-white mb-4">Products We’ve Built</h2>
             <p className="text-gray-400 max-w-2xl mx-auto">
-              Our talented professionals bring diverse skills and unwavering dedication to every project
+              Explore a completed product from 17K Technologies.
             </p>
           </div>
 
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-4 text-center">
-            {[
-              { number: '50+', label: 'Projects Completed' },
-              { number: '30+', label: 'Happy Clients' },
-              { number: '15+', label: 'Team Members' },
-              { number: '5+', label: 'Years Experience' }
-            ].map((stat, index) => (
-              <motion.div
-                key={index}
-                initial={{ opacity: 0, scale: 0.9 }}
-                whileInView={{ opacity: 1, scale: 1 }}
-                viewport={{ once: true }}
-                transition={{ delay: index * 0.1 }}
-                className="bg-gradient-to-br from-white/5 to-white/0 border border-white/10 rounded-xl p-6"
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="max-w-3xl mx-auto bg-gradient-to-br from-white/5 to-white/0 border border-white/10 rounded-xl p-6 md:p-8 flex flex-col md:flex-row items-center gap-8"
+          >
+            <div className="bg-white rounded-xl p-6 shrink-0">
+              <ImageWithFallback
+                src="/naijatalk-logo.png"
+                alt="NaijaTalk logo"
+                width={152}
+                height={100}
+                className="object-contain"
+              />
+            </div>
+            <div>
+              <span className="text-sm text-cyan-400">Completed product</span>
+              <h3 className="text-2xl text-white mt-2 mb-3">NaijaTalk News</h3>
+              <p className="text-gray-400 mb-6">
+                A news platform sharing stories, trends, and conversations from Nigeria and beyond.
+              </p>
+              <a
+                href="https://www.naijatalk.xyz"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center rounded-lg border border-cyan-500/30 px-4 py-2 text-cyan-400 hover:text-cyan-300 hover:border-cyan-500 transition-colors"
               >
-                <div className="text-3xl md:text-4xl bg-gradient-to-r from-cyan-400 to-purple-600 bg-clip-text text-transparent mb-2">
-                  {stat.number}
-                </div>
-                <div className="text-sm text-gray-400">{stat.label}</div>
-              </motion.div>
-            ))}
-          </div>
+                Visit NaijaTalk News <span className="sr-only">(opens in a new tab)</span>
+              </a>
+            </div>
+          </motion.div>
         </section>
       </div>
     </div>

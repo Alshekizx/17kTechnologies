@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import Image from "next/image";
 import { Menu, X } from "lucide-react";
 import { usePathname, useRouter } from "next/navigation";
 
@@ -13,7 +14,6 @@ export default function Header() {
     { name: "Home", href: "/" },
     { name: "About", href: "/about" },
     { name: "Services", href: "/services" },
-    { name: "Marketplace", href: "/marketplace" },
     { name: "Blog & Tutorials", href: "/blog" },
     { name: "Contact", href: "/contact" },
   ];
@@ -24,9 +24,14 @@ export default function Header() {
 
         {/* Logo */}
         <button onClick={() => router.push("/")} className="flex gap-2">
-          <div className="w-10 h-10 bg-gradient-to-br from-cyan-500 to-purple-600 rounded-lg flex items-center justify-center">
-            <span className="font-bold text-white">17K</span>
-          </div>
+          <Image
+            src="/logo.png"
+            alt="17K Technologies Limited"
+            width={250}
+            height={188}
+            className="w-12 h-auto shrink-0 object-contain rounded-lg"
+            priority
+          />
         </button>
 
         {/* Desktop Nav */}

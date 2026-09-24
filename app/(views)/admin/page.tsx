@@ -13,11 +13,6 @@ export default function AdminPage() {
             Upload Blog
           </button>
         </Link>
-        <Link href="/admin/uploadItemPage">
-          <button className="text-black px-6 py-3 bg-purple-500 rounded-md hover:bg-purple-600 transition">
-            Upload Item
-          </button>
-        </Link>
       </div>
     </div>
   );

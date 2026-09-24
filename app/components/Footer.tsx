@@ -1,4 +1,5 @@
-import { Facebook, Twitter, Instagram, Linkedin, Youtube, Mail } from 'lucide-react';
+import { Linkedin, Mail } from 'lucide-react';
+import Image from 'next/image';
 
 export default function Footer() {
   return (
@@ -8,9 +9,13 @@ export default function Footer() {
           {/* Company Info */}
           <div>
             <div className="flex items-center gap-2 mb-4">
-              <div className="w-10 h-10 bg-gradient-to-br from-cyan-500 to-purple-600 rounded-lg flex items-center justify-center">
-                <span className="font-bold text-white">17K</span>
-              </div>
+              <Image
+                src="/logo.png"
+                alt="17K Technologies Limited"
+                width={250}
+                height={188}
+                className="w-12 h-auto shrink-0 object-contain rounded-lg"
+              />
               <div>
                 <div className="text-white">17K Technologies</div>
                 <div className="text-xs text-cyan-400">Limited</div>
@@ -27,7 +32,6 @@ export default function Footer() {
             <ul className="space-y-2 text-sm">
               <li><a href="#" className="text-gray-400 hover:text-cyan-400 transition-colors">About Us</a></li>
               <li><a href="#" className="text-gray-400 hover:text-cyan-400 transition-colors">Services</a></li>
-              <li><a href="#" className="text-gray-400 hover:text-cyan-400 transition-colors">Marketplace</a></li>
             </ul>
           </div>
 
@@ -46,25 +50,13 @@ export default function Footer() {
           <div>
             <h3 className="text-white mb-4">Connect With Us</h3>
             <div className="flex gap-3 mb-4">
-              <a href="#" className="w-9 h-9 bg-white/5 rounded-lg flex items-center justify-center text-gray-400 hover:text-cyan-400 hover:bg-white/10 transition-all">
-                <Facebook size={18} />
-              </a>
-              <a href="#" className="w-9 h-9 bg-white/5 rounded-lg flex items-center justify-center text-gray-400 hover:text-cyan-400 hover:bg-white/10 transition-all">
-                <Twitter size={18} />
-              </a>
-              <a href="#" className="w-9 h-9 bg-white/5 rounded-lg flex items-center justify-center text-gray-400 hover:text-cyan-400 hover:bg-white/10 transition-all">
-                <Instagram size={18} />
-              </a>
-              <a href="#" className="w-9 h-9 bg-white/5 rounded-lg flex items-center justify-center text-gray-400 hover:text-cyan-400 hover:bg-white/10 transition-all">
+              <a href="https://www.linkedin.com/company/17k-technologies-limited/posts/?viewAsMember=true" target="_blank" rel="noopener noreferrer" aria-label="17K Technologies on LinkedIn (opens in a new tab)" className="w-9 h-9 bg-white/5 rounded-lg flex items-center justify-center text-gray-400 hover:text-cyan-400 hover:bg-white/10 transition-all">
                 <Linkedin size={18} />
-              </a>
-              <a href="#" className="w-9 h-9 bg-white/5 rounded-lg flex items-center justify-center text-gray-400 hover:text-cyan-400 hover:bg-white/10 transition-all">
-                <Youtube size={18} />
               </a>
             </div>
             <div className="flex items-center gap-2 text-sm text-gray-400">
               <Mail size={16} />
-              <span>info@17ktech.com</span>
+              <span>seyiduncan40@gmail.com</span>
             </div>
           </div>
         </div>

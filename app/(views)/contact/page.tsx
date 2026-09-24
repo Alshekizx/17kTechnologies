@@ -1,7 +1,7 @@
 "use client";
 import { useState } from 'react';
 import { motion } from 'motion/react';
-import { Mail, MapPin, Phone, Send, Facebook, Twitter, Instagram, Linkedin, Youtube } from 'lucide-react';
+import { Mail, MapPin, Phone, Send, Linkedin } from 'lucide-react';
 import { Input } from '@/app/components/ui/input'; 
 import { Textarea } from '@/app/components/ui/textarea';
 import { Button } from '@/app/components/ui/button';
@@ -61,8 +61,8 @@ export default function ContactPage() {
               </div>
               <h3 className="text-white mb-2">Email Us</h3>
               <p className="text-sm text-gray-400 mb-2">Send us an email anytime</p>
-              <a href="mailto:info@17ktech.com" className="text-cyan-400 hover:text-cyan-300 text-sm">
-                info@17ktech.com
+              <a href="mailto:seyiduncan40@gmail.com" className="text-cyan-400 hover:text-cyan-300 text-sm">
+                seyiduncan40@gmail.com
               </a>
             </div>
 
@@ -72,8 +72,8 @@ export default function ContactPage() {
               </div>
               <h3 className="text-white mb-2">Call Us</h3>
               <p className="text-sm text-gray-400 mb-2">Mon-Fri from 9am to 6pm</p>
-              <a href="tel:+1234567890" className="text-cyan-400 hover:text-cyan-300 text-sm">
-                +1 (234) 567-890
+              <a href="tel:+2349069194917" className="text-cyan-400 hover:text-cyan-300 text-sm">
+                +234 9069194917
               </a>
             </div>
 
@@ -93,20 +93,8 @@ export default function ContactPage() {
             <div className="bg-gradient-to-br from-white/5 to-white/0 border border-white/10 rounded-xl p-6">
               <h3 className="text-white mb-4">Connect With Us</h3>
               <div className="flex gap-3">
-                <a href="#" className="w-10 h-10 bg-white/5 rounded-lg flex items-center justify-center text-gray-400 hover:text-cyan-400 hover:bg-white/10 transition-all">
-                  <Facebook size={18} />
-                </a>
-                <a href="#" className="w-10 h-10 bg-white/5 rounded-lg flex items-center justify-center text-gray-400 hover:text-cyan-400 hover:bg-white/10 transition-all">
-                  <Twitter size={18} />
-                </a>
-                <a href="#" className="w-10 h-10 bg-white/5 rounded-lg flex items-center justify-center text-gray-400 hover:text-cyan-400 hover:bg-white/10 transition-all">
-                  <Instagram size={18} />
-                </a>
-                <a href="#" className="w-10 h-10 bg-white/5 rounded-lg flex items-center justify-center text-gray-400 hover:text-cyan-400 hover:bg-white/10 transition-all">
+                <a href="https://www.linkedin.com/company/17k-technologies-limited/posts/?viewAsMember=true" target="_blank" rel="noopener noreferrer" aria-label="17K Technologies on LinkedIn (opens in a new tab)" className="w-10 h-10 bg-white/5 rounded-lg flex items-center justify-center text-gray-400 hover:text-cyan-400 hover:bg-white/10 transition-all">
                   <Linkedin size={18} />
-                </a>
-                <a href="#" className="w-10 h-10 bg-white/5 rounded-lg flex items-center justify-center text-gray-400 hover:text-cyan-400 hover:bg-white/10 transition-all">
-                  <Youtube size={18} />
                 </a>
               </div>
             </div>
