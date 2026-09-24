@@ -18,6 +18,9 @@ const geistMono = Geist_Mono({
 export const metadata: Metadata = {
   title: "17k",
   applicationName: "17k",
+  verification: {
+    google: "zQfuvBHwBRv7W94xfJdsO33Zd0dQ1xrPRgDB7rglsxo",
+  },
   description: "17K Technologies Limited — web and mobile development, 3D design, animation, and digital products.",
 };
 
